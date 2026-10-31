@@ -1,0 +1,34 @@
+{
+  "weights": {"data_quality": 0.15, "fraud": 0.30, "financial": 0.30, "reporting": 0.15, "qualitative": 0.10},
+  "factor_names": {
+    "data_quality": "Chất lượng và toàn vẹn dữ liệu",
+    "fraud": "Rủi ro gian lận (kiểm tra bút toán)",
+    "financial": "Sức khỏe tài chính và hoạt động liên tục",
+    "reporting": "Rủi ro báo cáo (cut-off, doanh thu, phải thu)",
+    "qualitative": "Yếu tố định tính"
+  },
+  "cutoffs": {"accept": 40, "reject": 70},
+  "knockout": ["unbalanced_over_pm", "revenue_high_finding", "tb_mismatch_over_pm"],
+  "signals": {
+    "unbalanced_partial": 0.5,
+    "missing_months_full": 3,
+    "unknown_ratio_full": 0.05,
+    "missing_ratio_full": 0.05,
+    "out_period_ratio_full": 0.05,
+    "high_entries_share_full": 0.02,
+    "fraud_mix": [0.6, 0.4],
+    "benford_level_score": {"close": 0.0, "acceptable": 0.25, "marginal": 0.5, "nonconforming": 1.0},
+    "label_score": {"Tốt": 0.0, "Cần chú ý": 0.5, "Rủi ro": 1.0},
+    "neutral_score": 0.5,
+    "revenue_spike_full": 2.0,
+    "financial_ratios": ["altman_z", "current_ratio", "net_margin", "debt_to_equity"],
+    "condition_min_score": 40
+  },
+  "conditions": {
+    "data_quality": "Yêu cầu khách hàng giải trình chứng từ lệch/thiếu, cung cấp lại sổ đầy đủ 12 tháng và đối chiếu bảng cân đối số phát sinh.",
+    "fraud": "Tăng cỡ mẫu kiểm tra bút toán, kiểm tra 100% bút toán rủi ro cao, bổ sung nhân sự có kinh nghiệm.",
+    "financial": "Đánh giá kỹ giả định hoạt động liên tục, xác nhận nợ vay, xem xét kế hoạch tài chính của Ban Giám đốc.",
+    "reporting": "Tăng thủ tục cut-off cuối kỳ, gửi thư xác nhận công nợ phải thu, tham gia kiểm kê hàng tồn kho.",
+    "qualitative": "Tìm hiểu thêm về quản trị, thư giải trình của Ban Giám đốc, cân nhắc phí kiểm toán phù hợp với rủi ro."
+  }
+}
