@@ -1,0 +1,13 @@
+{
+  "name": "Công ty X (dữ liệu mẫu)",
+  "industry": "Thương mại",
+  "period_start": "2025-01-01",
+  "period_end": "2025-12-31",
+  "account_maps": {"2025": "config/account_map_tt200.json", "2026": "config/account_map_tt99.json"},
+  "files": {
+    "gl": "data/sample_gl.csv",
+    "opening": "data/opening_balances.csv",
+    "client_tb": "data/client_tb.csv"
+  },
+  "qualitative": {"industry_risk": 40, "governance": 50, "management_integrity": 40}
+}

@@ -1,0 +1,20 @@
+{
+  "name": "Công ty X (dữ liệu thật 2024)",
+  "industry": "Thương mại",
+  "period_start": "2024-01-01",
+  "period_end": "2024-12-31",
+  "account_maps": {
+    "2024": "config/account_map_tt200.json",
+    "2026": "config/account_map_tt99.json"
+  },
+  "files": {
+    "gl": "data/real/so_chi_tiet_2024.xlsx",
+    "opening": null,
+    "client_tb": "data/real/bang_can_doi_ps_tk_2024.xlsx"
+  },
+  "qualitative": {
+    "industry_risk": 40,
+    "governance": 50,
+    "management_integrity": 40
+  }
+}
