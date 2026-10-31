@@ -1,0 +1,79 @@
+{
+  "balance_tolerance": 1,
+  "tb_tolerance": 1000,
+  "max_post_lag_days": 30,
+  "round_base": 1000000,
+  "approval_thresholds": [
+    500000000,
+    200000000
+  ],
+  "threshold_lo": 0.95,
+  "after_hour": 20,
+  "before_hour": 6,
+  "cutoff_days": 5,
+  "large_factor": 0.5,
+  "min_user_entries": 5,
+  "known_users": [],
+  "iqr_k": 3.0,
+  "iqr_min_group": 20,
+  "benford_min_n": 100,
+  "vague_words": [
+    "điều chỉnh",
+    "khác",
+    "xử lý",
+    "đc",
+    "n/a",
+    "-",
+    "."
+  ],
+  "z_threshold": 2.0,
+  "holidays_note": "VERIFY against the official Vietnam holiday notice for the audited year.",
+  "holidays": [
+    "2024-01-01",
+    "2024-02-08",
+    "2024-02-09",
+    "2024-02-10",
+    "2024-02-11",
+    "2024-02-12",
+    "2024-02-13",
+    "2024-02-14",
+    "2024-04-18",
+    "2024-04-30",
+    "2024-05-01",
+    "2024-09-02",
+    "2024-09-03",
+    "2025-01-01",
+    "2025-01-25",
+    "2025-01-26",
+    "2025-01-27",
+    "2025-01-28",
+    "2025-01-29",
+    "2025-01-30",
+    "2025-01-31",
+    "2025-02-01",
+    "2025-02-02",
+    "2025-04-07",
+    "2025-04-30",
+    "2025-05-01",
+    "2025-05-02",
+    "2025-09-01",
+    "2025-09-02"
+  ],
+  "materiality": {
+    "benchmark": "revenue",
+    "pct": {
+      "pbt": 0.05,
+      "revenue": 0.005,
+      "assets": 0.01
+    },
+    "performance_factor": 0.75,
+    "trivial_factor": 0.05,
+    "reason": "Doanh thu ổn định hơn lợi nhuận với doanh nghiệp thương mại; lợi nhuận mỏng nên 5% LNTT dễ sai lệch."
+  },
+  "opening_prefixes": [
+    "OD",
+    "NKO",
+    "OI",
+    "OV"
+  ]
+}
