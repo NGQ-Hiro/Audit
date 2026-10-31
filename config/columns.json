@@ -1,0 +1,15 @@
+{
+  "so_ct": ["so_ct", "so_chung_tu", "so_hieu", "chung_tu"],
+  "ngay_ct": ["ngay_ct", "ngay_chung_tu"],
+  "ngay_ghi_so": ["ngay_ghi_so", "ngay_hach_toan", "ngay_gs", "ngay"],
+  "dien_giai": ["dien_giai", "noi_dung", "dien_giai_chung"],
+  "tk": ["tk", "tai_khoan", "so_hieu_tk"],
+  "no": ["no", "ps_no", "phat_sinh_no", "so_tien_no"],
+  "co": ["co", "ps_co", "phat_sinh_co", "so_tien_co"],
+  "tk_no": ["tk_no", "tai_khoan_no"],
+  "tk_co": ["tk_co", "tai_khoan_co"],
+  "so_tien": ["so_tien", "gia_tri", "so_tien_ps"],
+  "ma_doi_tuong": ["ma_doi_tuong", "ma_kh", "ma_ncc", "doi_tuong"],
+  "nguoi_lap": ["nguoi_lap", "nguoi_nhap", "user"],
+  "gio_nhap": ["gio_nhap", "gio", "thoi_gian_nhap", "ngay_gio_nhap"]
+}
