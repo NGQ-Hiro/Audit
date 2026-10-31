@@ -1,0 +1,52 @@
+{
+  "standard": "TT200/2014/TT-BTC",
+  "catalog": ["111","112","113","121","128","131","133","136","138","141","151","152","153","154","155","156","157","158","171",
+              "211","212","213","214","217","221","222","228","229","241","242","243","244",
+              "331","333","334","335","336","337","338","341","343","344","347","352","353","356","357",
+              "411","412","413","414","417","418","419","421","441","461","466",
+              "511","515","521","611","621","622","623","627","631","632","635","641","642",
+              "711","811","821","911","001","002","003","004","007","008"],
+  "closing_accounts": ["911"],
+  "cash_prefixes": ["111", "112", "113"],
+  "interest_prefixes": ["635"],
+  "depreciation_prefixes": ["214"],
+  "revenue_prefixes": ["511", "515", "711"],
+  "expense_prefixes": ["632", "635", "641", "642", "811"],
+  "asset_classes": ["1", "2"],
+  "funding_classes": ["3", "4"],
+  "pl_classes": ["5", "6", "7", "8", "9"],
+  "unusual_pairs": [
+    {"no": "211", "co": "511", "min": 0},
+    {"no": "111", "co": "511", "min": 100000000},
+    {"no": "642", "co": "111", "min": 100000000}
+  ],
+  "balance_sheet": {
+    "assets": {
+      "cash": ["111", "112", "113"],
+      "receivables": ["131", "136", "138"],
+      "inventory": ["15"],
+      "other_current_assets": ["1"],
+      "fixed_assets": ["21", "241"],
+      "other_noncurrent_assets": ["2"]
+    },
+    "funding": {
+      "payables": ["331"],
+      "short_term_other": ["3"],
+      "long_term_debt": ["3412", "343", "344", "347", "352"],
+      "retained": ["421"],
+      "equity_other": ["4"]
+    }
+  },
+  "income": {
+    "revenue_gross": {"prefixes": ["511"], "side": "credit"},
+    "deductions": {"prefixes": ["521"], "side": "debit"},
+    "cogs": {"prefixes": ["632"], "side": "debit"},
+    "selling": {"prefixes": ["641"], "side": "debit"},
+    "admin": {"prefixes": ["642"], "side": "debit"},
+    "fin_income": {"prefixes": ["515"], "side": "credit"},
+    "fin_expense": {"prefixes": ["635"], "side": "debit"},
+    "other_income": {"prefixes": ["711"], "side": "credit"},
+    "other_expense": {"prefixes": ["811"], "side": "debit"},
+    "tax": {"prefixes": ["821"], "side": "debit"}
+  }
+}

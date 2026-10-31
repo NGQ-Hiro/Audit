@@ -1,0 +1,19 @@
+{
+  "_source": "Common rule-of-thumb thresholds (Altman Z'' 2.6/1.1 per Altman 1995 emerging-market model). NOT industry averages: the team must replace with a cited industry source (e.g. sector report) before submission.",
+  "current_ratio": {"higher_is_better": true, "good": 1.5, "risk": 1.0},
+  "quick_ratio": {"higher_is_better": true, "good": 1.0, "risk": 0.5},
+  "cash_ratio": {"higher_is_better": true, "good": 0.2, "risk": 0.1},
+  "debt_to_assets": {"higher_is_better": false, "good": 0.5, "risk": 0.7},
+  "debt_to_equity": {"higher_is_better": false, "good": 1.0, "risk": 2.0},
+  "interest_coverage": {"higher_is_better": true, "good": 3.0, "risk": 1.5},
+  "dso": {"higher_is_better": false, "good": 45, "risk": 90},
+  "dio": {"higher_is_better": false, "good": 60, "risk": 120},
+  "ccc": {"higher_is_better": false, "good": 60, "risk": 120},
+  "asset_turnover": {"higher_is_better": true, "good": 1.0, "risk": 0.5},
+  "gross_margin": {"higher_is_better": true, "good": 0.2, "risk": 0.1},
+  "net_margin": {"higher_is_better": true, "good": 0.05, "risk": 0.0},
+  "roa": {"higher_is_better": true, "good": 0.05, "risk": 0.0},
+  "roe": {"higher_is_better": true, "good": 0.1, "risk": 0.0},
+  "altman_z": {"higher_is_better": true, "good": 2.6, "risk": 1.1},
+  "accruals": {"higher_is_better": false, "good": 0.05, "risk": 0.1}
+}
