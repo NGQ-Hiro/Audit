@@ -1,4 +1,6 @@
-"""Write Excel files, charts and the Vietnamese acceptance report."""
+"""Xuất kết quả: các file Excel, biểu đồ PNG và báo cáo chấp nhận khách hàng (report.md) bằng tiếng Việt.
+Module này chỉ ĐỌC từ Result, không tính toán nghiệp vụ.
+"""
 from __future__ import annotations
 
 from pathlib import Path
@@ -11,6 +13,7 @@ from .fp import TRAIL
 from .m2_je_tests import entries
 from .models import Finding
 
+# Từ điển đổi tên cột (tên code -> tiêu đề tiếng Việt có dấu) khi ghi Excel
 VI = {"ma_thu_tuc": "Mã thủ tục", "so_ct": "Số CT", "ngay": "Ngày", "tk": "TK", "so_tien": "Số tiền",
       "mo_ta": "Mô tả", "muc_do": "Mức độ rủi ro", "chi_tieu": "Chỉ tiêu", "gia_tri": "Giá trị",
       "danh_gia": "Đánh giá", "thu_tuc": "Thủ tục", "so_luong": "Số lượng", "so_rui_ro_cao": "Số rủi ro cao",
@@ -20,12 +23,14 @@ VI = {"ma_thu_tuc": "Mã thủ tục", "so_ct": "Số CT", "ngay": "Ngày", "tk"
 
 
 def write_excel(path: Path, sheets: dict[str, pd.DataFrame]) -> None:
+    """Ghi nhiều bảng vào một file Excel (mỗi bảng một sheet). Tên sheet tối đa 31 ký tự (giới hạn của Excel)."""
     with pd.ExcelWriter(path, engine="openpyxl") as xw:
         for name, df in sheets.items():
             df.rename(columns=VI).to_excel(xw, sheet_name=name[:31], index=False)
 
 
 def benford_frames(res: Result) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Trả về 2 bảng Benford: (tóm tắt n, MAD, chi2, mức phù hợp theo nhóm; tần suất từng chữ số đầu theo nhóm)."""
     summ = pd.DataFrame([{"nhom": k, "n": v["n"], "mad": v["mad"], "chi2": v["chi2"], "muc_phu_hop": v["level"]}
                          for k, v in res.benford.items()])
     freq = pd.concat({k: v["table"] for k, v in res.benford.items()}, names=["nhom"]).reset_index() if res.benford else summ
@@ -33,6 +38,7 @@ def benford_frames(res: Result) -> tuple[pd.DataFrame, pd.DataFrame]:
 
 
 def md_table(df: pd.DataFrame) -> str:
+    """Đổi DataFrame thành bảng Markdown. Số nhỏ hơn 1 hiện 4 chữ số thập phân, số khác hiện 2."""
     head = "| " + " | ".join(map(str, df.columns)) + " |\n|" + "---|" * len(df.columns)
     rows = ["| " + " | ".join((f"{v:,.4f}" if 0 < abs(v) < 1 else f"{v:,.2f}") if isinstance(v, float) else str(v) for v in r) + " |"
             for r in df.itertuples(index=False)]
@@ -40,17 +46,21 @@ def md_table(df: pd.DataFrame) -> str:
 
 
 def _ratio_frame(res: Result) -> pd.DataFrame:
+    """Bảng các chỉ số tài chính (nhóm, tên, giá trị, đánh giá, ghi chú)."""
     return pd.DataFrame([{"nhom": r.group, "chi_so": r.name, "gia_tri": r.value, "danh_gia": r.label, "ghi_chu": r.note}
                          for r in res.ratios])
 
 
 def group_scores(res: Result) -> dict[str, float]:
+    """Điểm mỗi nhóm chỉ số cho biểu đồ radar: Tốt = 100, Cần chú ý = 50, Rủi ro = 0, rồi lấy trung bình theo nhóm.
+    Chỉ số "Tham khảo" hoặc "Không tính được" không có điểm nên bị bỏ qua."""
     score = {"Tốt": 100, "Cần chú ý": 50, "Rủi ro": 0}
     df = _ratio_frame(res).assign(diem=lambda d: d["danh_gia"].map(score)).dropna(subset=["diem"])
     return df.groupby("nhom")["diem"].mean().to_dict()
 
 
 def write_charts(res: Result, lines: pd.DataFrame, out: Path) -> list[Path]:
+    """Vẽ toàn bộ biểu đồ vào thư mục out/charts và trả về danh sách file."""
     cb, st = ChartBuilder(out / "charts"), res.statements
     ents = entries(lines)
     paths = [cb.revenue_cogs_profit(st.monthly), cb.gross_margin(res.month_flags)]
@@ -62,6 +72,7 @@ def write_charts(res: Result, lines: pd.DataFrame, out: Path) -> list[Path]:
 
 
 def write_report(res: Result, out: Path) -> Path:
+    """Viết report.md: kết luận, điểm, toàn vẹn dữ liệu, trọng yếu, bút toán, chỉ số, độ nhạy, giả định, hạn chế."""
     a, m, st = res.assessment, res.materiality, res.statements
     top = pd.DataFrame([f.row() for f in res.findings[:10]])
     factors = pd.DataFrame([{"nhom": k, "diem": v, "trong_so": a.weights[k]} for k, v in a.scores.items()])
@@ -149,6 +160,7 @@ Quy tắc chặn giữ kết luận cuối ở mức tối thiểu "Chấp nhậ
 
 
 def export_all(res: Result, lines: pd.DataFrame, out: Path) -> None:
+    """Điểm vào duy nhất: xuất 5 file Excel (theo Module 1–5, 7), biểu đồ và report.md."""
     out.mkdir(parents=True, exist_ok=True)
     integ = res.integrity
     write_excel(out / "01_data_integrity.xlsx",
