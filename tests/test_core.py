@@ -7,11 +7,11 @@ import numpy as np
 import pandas as pd
 import pytest
 
-from audit.je_tests import benford_table
-from audit.ledger import GeneralLedger, TrialBalance
-from audit.loaders import drop_invalid, load_opening, make_loader
+from audit.m2_je_tests import benford_table
+from audit.m3_ledger import GeneralLedger, TrialBalance
+from audit.m1_loaders import drop_invalid, load_opening, make_loader
 from audit.models import Finding, RiskLevel, UnbalancedEntryError, read_json
-from audit.statements import build_statements
+from audit.m3_statements import build_statements
 
 ROOT = Path(__file__).resolve().parent.parent
 MAP = read_json(ROOT / "config/account_map_tt200.json")
@@ -81,7 +81,7 @@ def test_ledger_export_subtotals_are_skipped_and_opening_kept(tmp_path):
     f.write_text("Số chứng từ,Ngày hạch toán,Diễn giải,Tài khoản,PS Nợ,PS Có,Dư Nợ,Dư Có\n"
                  ",,Số dư đầu kỳ,1111,0,0,100,0\nPT1,2024-01-31 00:00:00,Thu,1111,50,0,0,0\n"
                  ",,Cộng,,50,0,0,0\n,,,,999,999,0,0\n", encoding="utf-8")
-    from audit.loaders import make_loader
+    from audit.m1_loaders import make_loader
     loader = make_loader(f)
     df = loader.load(f)
     assert len(df) == 1 and df["ngay_ghi_so"].iloc[0].day == 31
@@ -90,7 +90,7 @@ def test_ledger_export_subtotals_are_skipped_and_opening_kept(tmp_path):
 
 def test_gap_test_groups_by_series_and_month():
     import pandas as pd
-    from audit.je_tests import GapTest
+    from audit.m2_je_tests import GapTest
     df = pd.DataFrame({"so_ct": ["AC24030001", "AC24030003", "AC24040001", "T54942408001", "T54942408002"]})
     out = GapTest({"pm": 1}).run(df)
     assert len(out) == 1 and out[0].so_ct.startswith("AC24030002")

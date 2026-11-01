@@ -5,10 +5,10 @@ from pathlib import Path
 
 import pandas as pd
 
-from .charts import ChartBuilder
+from .m6_charts import ChartBuilder
 from .engagement import Result
 from .fp import TRAIL
-from .je_tests import entries
+from .m2_je_tests import entries
 from .models import Finding
 
 VI = {"ma_thu_tuc": "Mã thủ tục", "so_ct": "Số CT", "ngay": "Ngày", "tk": "TK", "so_tien": "Số tiền",

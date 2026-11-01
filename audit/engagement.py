@@ -7,16 +7,16 @@ from typing import Mapping
 
 import pandas as pd
 
-from .acceptance import AcceptanceEngine, Assessment
-from .analytics import flag_months
+from .m7_acceptance import AcceptanceEngine, Assessment
+from .m4_analytics import flag_months
 from .fp import audit_log
-from .integrity import IntegrityReport
-from .je_tests import BenfordTest, JournalEntryTest, build_tests, summarize
-from .ledger import GeneralLedger, TrialBalance
-from .materiality import Materiality
+from .m1_integrity import IntegrityReport
+from .m2_je_tests import BenfordTest, JournalEntryTest, build_tests, summarize
+from .m3_ledger import GeneralLedger, TrialBalance
+from .m5_materiality import Materiality
 from .models import Client, Finding, RatioResult, UnbalancedEntryError
-from .ratios import compute_ratios, figures
-from .statements import Statements, build_statements
+from .m4_ratios import compute_ratios, figures
+from .m3_statements import Statements, build_statements
 
 
 @dataclass(frozen=True)

@@ -9,7 +9,7 @@ from typing import Mapping, Sequence
 
 import pandas as pd
 
-from .ledger import GeneralLedger, TrialBalance
+from .m3_ledger import GeneralLedger, TrialBalance
 
 
 def tag(tks: Sequence[str], items: Mapping[str, Sequence[str]]) -> list:

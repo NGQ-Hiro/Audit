@@ -41,13 +41,13 @@ Dữ liệu thật nằm trong `data/real/`: sổ chi tiết 2024 và bảng câ
 
 | # | Module | File |
 |---|---|---|
-| 1 | Toàn vẹn dữ liệu | `audit/integrity.py`, `audit/loaders.py` |
-| 2 | Kiểm tra bút toán JE01–JE14 (JE14 = Benford) | `audit/je_tests.py` |
-| 3 | Sổ cái, bảng cân đối phát sinh, BCĐKT / KQKD | `audit/ledger.py`, `audit/statements.py` |
-| 4 | Chỉ số tài chính, Altman Z'', dồn tích, ±2σ theo tháng | `audit/ratios.py`, `audit/analytics.py` |
-| 5 | Mức trọng yếu (VSA 320) | `audit/materiality.py` |
-| 6 | Biểu đồ | `audit/charts.py` |
-| 7 | Đánh giá chấp nhận khách hàng | `audit/acceptance.py` |
+| 1 | Toàn vẹn dữ liệu | `audit/m1_integrity.py`, `audit/m1_loaders.py` |
+| 2 | Kiểm tra bút toán JE01–JE14 (JE14 = Benford) | `audit/m2_je_tests.py` |
+| 3 | Sổ cái, bảng cân đối phát sinh, BCĐKT / KQKD | `audit/m3_ledger.py`, `audit/m3_statements.py` |
+| 4 | Chỉ số tài chính, Altman Z'', dồn tích, ±2σ theo tháng | `audit/m4_ratios.py`, `audit/m4_analytics.py` |
+| 5 | Mức trọng yếu (VSA 320) | `audit/m5_materiality.py` |
+| 6 | Biểu đồ | `audit/m6_charts.py` |
+| 7 | Đánh giá chấp nhận khách hàng | `audit/m7_acceptance.py` |
 
 Mọi con số có thể thay đổi nằm trong `config/` (tài khoản, ngưỡng, trọng số, benchmark). Không có mã tài khoản nào được viết cứng trong Python.
 
@@ -93,7 +93,7 @@ Mọi con số có thể thay đổi nằm trong `config/` (tài khoản, ngư�
 | Không có giờ nhập (`gio`) | 0% dòng có dữ liệu | JE05 bị bỏ qua; biểu đồ 04 vẽ thứ trong tuần × tháng ghi sổ thay cho thứ × giờ | Xin khách hàng file có giờ nhập |
 | Không có người lập (`nguoi_lap`) | 0% dòng có dữ liệu | JE10 bị bỏ qua; biểu đồ 05 nhóm theo tiền tố số chứng từ (top 15) | Xin file có user ID |
 | Chỉ có 1 năm (2024) | 12 tháng, không có 2023 | Không có phân tích xu hướng, không tính Beneish M-score; chỉ số "bình quân" dùng số đầu kỳ và cuối kỳ của năm 2024 | Xin BCTC 2023 |
-| TK 131/331 chưa tách theo đối tượng | `ma_doi_tuong` có ở 79% dòng, nhưng BCĐKT vẫn trình bày theo số dư thuần từng tài khoản | Công nợ phải thu/phải trả có thể bị bù trừ giữa các khách hàng | Tách theo `ma_doi_tuong` trong `statements.py` |
+| TK 131/331 chưa tách theo đối tượng | `ma_doi_tuong` có ở 79% dòng, nhưng BCĐKT vẫn trình bày theo số dư thuần từng tài khoản | Công nợ phải thu/phải trả có thể bị bù trừ giữa các khách hàng | Tách theo `ma_doi_tuong` trong `m3_statements.py` |
 | JE03 chỉ đọc số chứng từ dạng "chuỗi + YYMM + số thứ tự" | 454 khoảng trống, tổng 624 số bị thiếu, dài nhất 19 số liên tiếp; 129 dòng không có số chứng từ | Có thể là sổ xuất thiếu, không chắc là chứng từ bị xóa | Hỏi khách hàng về chứng từ bị hủy / bộ lọc khi xuất sổ |
 | Số dư đầu kỳ không có file riêng | Lấy từ dòng "Số dư đầu kỳ" của sổ; TK không phát sinh lấy từ bảng CĐPS của khách hàng | Nếu bảng CĐPS sai thì số dư đầu kỳ sai | Xin file số dư đầu kỳ riêng |
 | Sổ lệch bảng CĐPS của khách hàng | 1 tài khoản: 6418, lệch 812,142 đồng (chứng từ `INO2402001`, các dòng lương/BHTN chỉ có bên Nợ) | Chứng từ không cân duy nhất ngoài nhóm đầu kỳ | Hỏi khách hàng về chứng từ này |
